@@ -3,6 +3,14 @@ package com.zj.study.leetcode;
 import java.util.Arrays;
 
 /**
+ * 题目链接: <a>https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/</a>
+ *
+ * 给定一个已按照升序排列的整数数组 numbers，请你从数组中找出两个数满足相加之和等于目标数 target。
+ * 函数应该以长度为2的整数数组的形式返回这两个数的下标值。numbers 的下标从 1 开始计数，所以答案数组应当满足 1 <= answer[0] < answer[1] <= numbers.length 。
+ * 你可以假设每个输入只对应唯一的答案，而且你不可以重复使用相同的元素。
+ *
+ * 思路: 快慢指针
+ *
  * @author zj
  * @date 2021/3/25 1:54 下午
  */
