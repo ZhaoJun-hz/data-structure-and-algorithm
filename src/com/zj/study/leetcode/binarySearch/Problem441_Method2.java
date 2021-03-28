@@ -1,4 +1,4 @@
-package com.zj.study.leetcode;
+package com.zj.study.leetcode.binarySearch;
 
 /**
  * @author zj
@@ -23,9 +23,9 @@ public class Problem441_Method2 {
                 sum = (mid * (mid + 1)) >> 1;
                 if (sum == n) {
                     return (int) mid;
-                }else if (sum < n) {
+                } else if (sum < n) {
                     l = (int) (mid + 1);
-                }else if (sum > n) {
+                } else if (sum > n) {
                     r = (int) (mid - 1);
                 }
             }

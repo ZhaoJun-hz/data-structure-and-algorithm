@@ -1,4 +1,4 @@
-package com.zj.study.leetcode;
+package com.zj.study.leetcode.binarySearch;
 
 public class Problem374 {
 
@@ -10,14 +10,14 @@ public class Problem374 {
     private static class Solution extends GuessGame {
         public int guessNumber(int n) {
             int l = 1, r = n;
-            while(l < r) {
+            while (l < r) {
                 int mid = l + ((r - l) >> 1);
                 int result = guess(mid);
-                if(result == 0) {
+                if (result == 0) {
                     return mid;
-                }else if (result == -1) {
+                } else if (result == -1) {
                     l = mid + 1;
-                }else {
+                } else {
                     r = mid - 1;
                 }
             }
@@ -27,7 +27,7 @@ public class Problem374 {
 
     private static class GuessGame {
         public int guess(int n) {
-            if(n == 1) return 0;
+            if (n == 1) return 0;
             else if (n < 1) return -1;
             else return 1;
         }

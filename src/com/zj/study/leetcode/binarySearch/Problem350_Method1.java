@@ -1,4 +1,4 @@
-package com.zj.study.leetcode;
+package com.zj.study.leetcode.binarySearch;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -27,8 +27,8 @@ public class Problem350_Method1 {
             int index = 0;
             for (int num : nums2) {
                 Integer times = map.getOrDefault(num, 0);
-                if(times > 0) {
-                    result[index ++] = num;
+                if (times > 0) {
+                    result[index++] = num;
                 }
                 times--;
                 if (times > 0) {

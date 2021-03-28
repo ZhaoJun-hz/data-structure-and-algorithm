@@ -1,4 +1,4 @@
-package com.zj.study.leetcode;
+package com.zj.study.leetcode.binarySearch;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -30,8 +30,8 @@ public class Problem349_Method2 {
             }
             int[] result = new int[resultSet.size()];
             int index = 0;
-            for(Integer num : resultSet) {
-                result[index ++] = num;
+            for (Integer num : resultSet) {
+                result[index++] = num;
             }
             return result;
         }

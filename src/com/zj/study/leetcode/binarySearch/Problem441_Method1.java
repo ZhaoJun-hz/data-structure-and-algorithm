@@ -1,4 +1,4 @@
-package com.zj.study.leetcode;
+package com.zj.study.leetcode.binarySearch;
 
 /**
  * @author zj
@@ -18,10 +18,10 @@ public class Problem441_Method1 {
         public int arrangeCoins(int n) {
             int sum = 0;
             int index = 1;
-            while(true) {
-                if(n - sum == index) {
+            while (true) {
+                if (n - sum == index) {
                     return index;
-                }else if (n - sum < index) {
+                } else if (n - sum < index) {
                     return index - 1;
                 }
                 sum += index;

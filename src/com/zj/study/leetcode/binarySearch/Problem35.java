@@ -1,12 +1,12 @@
-package com.zj.study.leetcode;
+package com.zj.study.leetcode.binarySearch;
 
 /**
  * 题目链接: <a>https://leetcode-cn.com/problems/search-insert-position/</a>
- *
+ * <p>
  * 给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。
  * 如果目标值不存在于数组中，返回它将会被按顺序插入的位置。
  * 你可以假设数组中无重复元素。
- *
+ * <p>
  * 思路:二分
  *
  * @author zj
@@ -16,7 +16,7 @@ package com.zj.study.leetcode;
 public class Problem35 {
     public static void main(String[] args) {
         Solution solution = new Solution();
-        int[] nums = {1,3,5,6};
+        int[] nums = {1, 3, 5, 6};
         int target = 5;
         System.out.println(solution.searchInsert(nums, target));
 
@@ -28,7 +28,7 @@ public class Problem35 {
         target = 7;
         System.out.println(solution.searchInsert(nums, target));
 
-        nums = new int[]{1,3,5,6};
+        nums = new int[]{1, 3, 5, 6};
         target = 0;
         System.out.println(solution.searchInsert(nums, target));
     }

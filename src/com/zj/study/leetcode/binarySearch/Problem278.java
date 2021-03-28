@@ -1,4 +1,4 @@
-package com.zj.study.leetcode;
+package com.zj.study.leetcode.binarySearch;
 
 /**
  * @author zj
@@ -25,7 +25,7 @@ public class Problem278 {
                         index = mid;
                     }
                     r = mid - 1;
-                }else {
+                } else {
                     l = mid + 1;
                 }
             }
@@ -35,6 +35,7 @@ public class Problem278 {
 
     private static class VersionControl {
         int version = 4;
+
         boolean isBadVersion(int mid) {
             return mid == version;
         }

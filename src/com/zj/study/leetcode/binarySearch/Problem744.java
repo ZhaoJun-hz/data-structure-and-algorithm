@@ -1,4 +1,4 @@
-package com.zj.study.leetcode;
+package com.zj.study.leetcode.binarySearch;
 
 /**
  * @author zj
@@ -41,7 +41,7 @@ public class Problem744 {
                 mid = l + ((r - l) >> 1);
                 if (letters[mid] <= target) {
                     l = mid + 1;
-                }else {
+                } else {
                     r = mid;
                 }
             }

@@ -1,4 +1,4 @@
-package com.zj.study.leetcode;
+package com.zj.study.leetcode.binarySearch;
 
 public class Problem704 {
 
@@ -7,7 +7,7 @@ public class Problem704 {
         // int[] nums = {-1,0,3,5,9,12};
         // int target = 9;
 
-        int[] nums = {-1,0,3,5,9,12};
+        int[] nums = {-1, 0, 3, 5, 9, 12};
         int target = 2;
         System.out.println(solution.search(nums, target));
     }

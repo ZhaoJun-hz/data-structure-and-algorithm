@@ -1,4 +1,4 @@
-package com.zj.study.leetcode;
+package com.zj.study.leetcode.binarySearch;
 
 import java.util.Arrays;
 
@@ -6,11 +6,11 @@ public class Problem1337_Method1 {
     public static void main(String[] args) {
         Solution solution = new Solution();
         int[][] mat = {
-                {1,1,0,0,0},
-                {1,1,1,1,0},
-                {1,0,0,0,0},
-                {1,1,0,0,0},
-                {1,1,1,1,1}
+                {1, 1, 0, 0, 0},
+                {1, 1, 1, 1, 0},
+                {1, 0, 0, 0, 0},
+                {1, 1, 0, 0, 0},
+                {1, 1, 1, 1, 1}
         };
         int k = 3;
         System.out.println(Arrays.toString(solution.kWeakestRows(mat, k)));
@@ -21,9 +21,9 @@ public class Problem1337_Method1 {
             int row = mat.length;
             int col = mat[0].length;
             int temp[][] = new int[row][2];
-            for(int i = 0; i < row; i++) {
+            for (int i = 0; i < row; i++) {
                 temp[i][0] = i;
-                for(int j = 0; j < col; j++) {
+                for (int j = 0; j < col; j++) {
                     if (mat[i][j] == 1) {
                         temp[i][1] += 1;
                     }

@@ -1,4 +1,4 @@
-package com.zj.study.leetcode;
+package com.zj.study.leetcode.binarySearch;
 
 import java.util.Arrays;
 
@@ -26,7 +26,7 @@ public class Problem1337_Method2 {
         public int[] kWeakestRows(int[][] mat, int k) {
             int row = mat.length;
             int temp[][] = new int[row][2];
-            for(int i = 0; i < row; i++) {
+            for (int i = 0; i < row; i++) {
                 temp[i][0] = i;
                 temp[i][1] = searchBinary(mat[i]);
             }
@@ -43,12 +43,12 @@ public class Problem1337_Method2 {
             int l = 0, r = nums.length - 1;
             int mid;
             int index = -1;
-            while(l <= r) {
+            while (l <= r) {
                 mid = l + ((r - l) >> 1);
-                if(nums[mid] == 1) {
+                if (nums[mid] == 1) {
                     index = mid;
                     l = mid + 1;
-                }else {
+                } else {
                     r = mid - 1;
                 }
             }

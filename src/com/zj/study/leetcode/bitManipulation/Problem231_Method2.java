@@ -1,12 +1,12 @@
-package com.zj.study.leetcode;
+package com.zj.study.leetcode.bitManipulation;
 
 /**
- *
  * 题目链接: <a>https://leetcode-cn.com/problems/power-of-two/</a>
- *
+ * <p>
  * 给定一个整数，编写一个函数来判断它是否是 2 的幂次方。
- *
+ * <p>
  * 思路: 位运算, x & (x - 1) 把最低位的1去掉, 如果为0.则
+ *
  * @author zj
  * @desiription:
  * @date 2021/3/26 4:53 下午

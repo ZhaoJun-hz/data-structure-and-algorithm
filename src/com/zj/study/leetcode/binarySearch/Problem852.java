@@ -1,4 +1,4 @@
-package com.zj.study.leetcode;
+package com.zj.study.leetcode.binarySearch;
 
 
 public class Problem852 {
@@ -17,9 +17,9 @@ public class Problem852 {
                 int mid = l + ((r - l) >> 1);
                 if (arr[mid] > arr[mid - 1] && arr[mid] > arr[mid + 1]) {
                     return mid;
-                }else if (arr[mid] < arr[mid - 1]) {
+                } else if (arr[mid] < arr[mid - 1]) {
                     r = mid;
-                }else if (arr[mid] < arr[mid + 1]){
+                } else if (arr[mid] < arr[mid + 1]) {
                     l = mid;
                 }
             }
