@@ -4,6 +4,13 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * 题目链接: <a>https://leetcode-cn.com/problems/intersection-of-two-arrays/</a>
+ * <p>
+ * 给定两个数组，编写一个函数来计算它们的交集。
+ * <p>
+ * 思路: 使用set
+ */
 public class Problem349_Method1 {
 
     public static void main(String[] args) {

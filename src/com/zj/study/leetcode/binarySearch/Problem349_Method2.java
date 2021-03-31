@@ -4,10 +4,17 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * 题目链接: <a>https://leetcode-cn.com/problems/intersection-of-two-arrays/</a>
+ * <p>
+ * 给定两个数组，编写一个函数来计算它们的交集。
+ * <p>
+ * 思路: 数组双排序,双指针
+ */
 public class Problem349_Method2 {
     public static void main(String[] args) {
-        int[] nums1 = {1,2,2,1};
-        int[] nums2 = {2,2};
+        int[] nums1 = {1, 2, 2, 1};
+        int[] nums2 = {2, 2};
         Solution solution = new Solution();
         System.out.println(Arrays.toString(solution.intersection(nums1, nums2)));
     }
@@ -17,14 +24,14 @@ public class Problem349_Method2 {
             Arrays.sort(nums1);
             Arrays.sort(nums2);
             Set<Integer> resultSet = new HashSet<>();
-            for (int i = 0, j = 0; i < nums1.length && j < nums2.length;) {
+            for (int i = 0, j = 0; i < nums1.length && j < nums2.length; ) {
                 if (nums1[i] == nums2[j]) {
                     resultSet.add(nums1[i]);
                     i++;
                     j++;
-                }else if(nums1[i] > nums2[j]) {
+                } else if (nums1[i] > nums2[j]) {
                     j++;
-                }else if (nums1[i] < nums2[j]) {
+                } else if (nums1[i] < nums2[j]) {
                     i++;
                 }
             }

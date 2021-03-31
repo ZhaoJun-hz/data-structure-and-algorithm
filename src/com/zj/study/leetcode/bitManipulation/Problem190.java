@@ -6,7 +6,7 @@ package com.zj.study.leetcode.bitManipulation;
  *
  * 颠倒给定的 32 位无符号整数的二进制位。
  *
- *
+ * 思路: 位运算,手动改变结果二进制的值
  *
  * @author zj
  * @desiription:
