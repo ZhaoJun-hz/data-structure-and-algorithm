@@ -10,7 +10,7 @@ import java.util.Stack;
  * @desiription:
  * @date 2021/4/1 6:41 下午
  */
-public class Problem224 {
+public class Problem224_Method1 {
     public static void main(String[] args) {
         Solution solution = new Solution();
         System.out.println(solution.calculate("1 + 1")); // 2

@@ -1,0 +1,60 @@
+package com.zj.study.leetcode.offer;
+
+import java.util.Arrays;
+
+/**
+ * @author zj
+ * @desiription:
+ * @date 2021/4/2 6:04 下午
+ */
+public class Problem71_Method1 {
+    public static void main(String[] args) {
+        int[] nums;
+        Solution solution = new Solution();
+        nums = new int[]{7, 5, 6, 6, 4}; // 6
+        System.out.println(solution.reversePairs(nums));
+        System.out.println(Arrays.toString(nums));
+        nums = new int[]{7, 5, 6, 4}; // 6
+        System.out.println(solution.reversePairs(nums));
+        System.out.println(Arrays.toString(nums));
+    }
+
+    private static class Solution {
+
+        public int reversePairs(int[] nums) {
+            if (nums == null || nums.length < 2) {
+                return 0;
+            }
+            return mergeSort(nums, 0, nums.length - 1);
+        }
+
+        private int mergeSort(int[] arr, int l, int r) {
+            if (l == r) return 0;
+            int mid = l + ((r - l) >> 1);
+            return mergeSort(arr, l, mid) + mergeSort(arr, mid + 1, r) + merge(arr, l, mid, r);
+        }
+
+        private int merge(int[] arr, int l, int mid, int r) {
+            int help[] = new int[r - l + 1];
+            int i = 0, result = 0;
+            int p1 = l, p2 = mid + 1;
+            while (p1 <= mid && p2 <= r) {
+                result += arr[p1] > arr[p2] ? (r - p2 + 1) : 0;
+                // 这里, 如果两个数相等, 先拷贝右边的数, 要不然不知道右边有多少个数比这个数大
+                help[i++] = arr[p1] > arr[p2] ? arr[p1++] : arr[p2++];
+            }
+            while (p1 <= mid) {
+                help[i++] = arr[p1++];
+            }
+            while (p2 <= r) {
+                help[i++] = arr[p2++];
+            }
+
+            for (int j = 0; j < help.length; j++) {
+                arr[l + j] = help[j];
+            }
+            return result;
+        }
+    }
+
+}

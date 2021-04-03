@@ -20,8 +20,6 @@ public class Problem150 {
         System.out.println(solution.evalRPN(tokens));
         tokens = new String[]{"4","3","-"};
         System.out.println(solution.evalRPN(tokens));
-
-
     }
 
     private static class Solution {
