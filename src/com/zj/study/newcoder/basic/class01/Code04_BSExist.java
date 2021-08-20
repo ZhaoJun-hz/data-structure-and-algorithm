@@ -1,44 +1,44 @@
-package com.zj.study.basic.class01;
+package com.zj.study.newcoder.basic.class01;
 
 import java.util.Arrays;
 
-public class Code05_BSNearLeft {
-    public static int nearLeft(int[] arr, int num) {
-        int l = 0, r = arr.length - 1, mid = 0;
-        int left = arr.length - 1;
+public class Code04_BSExist {
+    public static boolean exist1(int[] arr, int num) {
+        if (arr == null || arr.length == 0) {
+            return false;
+        }
+        int l = 0, r = arr.length - 1, middle = 0;
         while (l < r) {
-            mid = (l + r) >> 1;
-            if (arr[mid] >= num) {
-                if (mid < left) {
-                    left = mid;
-                }
-                r = mid - 1;
-            }else {
-                l = mid + 1;
+            middle = (l + r) / 2;
+            if(arr[middle] == num) {
+                return true;
+            } else if(arr[middle] > num) {
+                r = middle - 1;
+            } else {
+                l = middle + 1;
             }
         }
-
-        if (arr[l] >= num && l < left) {
-            left = l;
-        }
-        return left;
+        return arr[l] == num;
     }
 
-    // 在arr上，找满足>=value的最左位置
-    public static int nearestIndex(int[] arr, int value) {
+    public static boolean exist2(int[] sortedArr, int num) {
+        if (sortedArr == null || sortedArr.length == 0) {
+            return false;
+        }
         int L = 0;
-        int R = arr.length - 1;
-        int index = -1;
+        int R = sortedArr.length - 1;
+        int mid = 0;
         while (L < R) {
-            int mid = L + ((R - L) >> 1);
-            if (arr[mid] >= value) {
-                index = mid;
+            mid = L + ((R - L) >> 1);
+            if (sortedArr[mid] == num) {
+                return true;
+            } else if (sortedArr[mid] > num) {
                 R = mid - 1;
             } else {
                 L = mid + 1;
             }
         }
-        return index;
+        return sortedArr[L] == num;
     }
 
     // for test
@@ -87,11 +87,11 @@ public class Code05_BSNearLeft {
         for (int i = 0; i < testTime; i++) {
             int[] arr1 = generateRandomArray(maxSize, maxValue);
             Arrays.sort(arr1);
-            int nearLeft = nearLeft(arr1, 50);
-            int index = nearestIndex(arr1, 50);
-            if (! (nearLeft == index)) {
-                System.out.println("nearLeft = " + nearLeft +",num = " + arr1[nearLeft]);
-                System.out.println("index = " + index + ",num =" + arr1[index]);
+            boolean exist1 = exist1(arr1, 50);
+            boolean exist2 = exist2(arr1, 50);
+            if (!exist1 == exist2) {
+                System.out.println(exist1);
+                System.out.println(exist2);
                 printArray(arr1);
                 succeed = false;
                 break;

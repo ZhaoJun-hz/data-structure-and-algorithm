@@ -1,4 +1,4 @@
-package com.zj.study.basic.class01;
+package com.zj.study.newcoder.basic.class01;
 
 public class Code07_EvenTimesOddTimes {
 

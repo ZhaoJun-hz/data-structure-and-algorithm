@@ -1,4 +1,4 @@
-package com.zj.study.basic.class02;
+package com.zj.study.newcoder.basic.class02;
 
 import java.util.Arrays;
 

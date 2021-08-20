@@ -1,26 +1,35 @@
-package com.zj.study.basic.class01;
-
+package com.zj.study.newcoder.basic.class01;
 
 import java.util.Arrays;
 
-public class Code01_SelectionSort {
-    public static void selectionSort(int[] arr) {
-        if (arr == null || arr.length < 2) {
+public class Code02_BubbleSort {
+    public static void bubbleSort(int[] arr) {
+        if  (arr == null || arr.length < 2) {
             return;
         }
-        for (int i = 0; i < arr.length - 1; i++) { // i ~ N - 1
-            int minIndex = i;
-            for (int j = i + 1; j < arr.length; j++) { // i ~ N - 1 上找最小值下标
-                minIndex = arr[j] < arr[minIndex] ? j : minIndex;
+        for (int e = arr.length - 1; e > 0; e--) {
+            for (int j = 0; j < e; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    swap(arr, j, j + 1);
+                }
             }
-            swap(arr, i, minIndex);
         }
     }
 
+    // 交换arr的i和j位置上的值
     public static void swap(int[] arr, int i, int j) {
-        int tmp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = tmp;
+        // ^ 不同为1 相同为0
+        // ^ 运算还可以理解为无进位相加
+        // 0 ^ N = N,  N ^ N = 0
+        // ^ 运算满足交换律和结合律
+        // 同一批数进行 ^ 运算, 结果为同一个数, 和顺序无关
+
+        // 面试题,要求时间复杂度O(n), 空间复杂度O(1)
+        // 在一个数组中, 只有一种数出现奇数次, 其他所有数都出现偶数次, 求这个数
+        // 在一个数组中, 只有两种数出现奇数次, 其他所有数都出现偶数次, 求这两个数
+        arr[i] = arr[i] ^ arr[j];
+        arr[j] = arr[i] ^ arr[j];
+        arr[i] = arr[i] ^ arr[j];
     }
 
     // for test
@@ -88,7 +97,7 @@ public class Code01_SelectionSort {
         for (int i = 0; i < testTime; i++) {
             int[] arr1 = generateRandomArray(maxSize, maxValue);
             int[] arr2 = copyArray(arr1);
-            selectionSort(arr1);
+            bubbleSort(arr1);
             comparator(arr2);
             if (!isEqual(arr1, arr2)) {
                 succeed = false;
@@ -101,7 +110,7 @@ public class Code01_SelectionSort {
 
         int[] arr = generateRandomArray(maxSize, maxValue);
         printArray(arr);
-        selectionSort(arr);
+        bubbleSort(arr);
         printArray(arr);
     }
 

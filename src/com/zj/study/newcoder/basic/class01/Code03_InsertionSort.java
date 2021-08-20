@@ -1,44 +1,23 @@
-package com.zj.study.basic.class01;
+package com.zj.study.newcoder.basic.class01;
 
 import java.util.Arrays;
 
-public class Code04_BSExist {
-    public static boolean exist1(int[] arr, int num) {
-        if (arr == null || arr.length == 0) {
-            return false;
+public class Code03_InsertionSort {
+    public static void insertionSort(int[] arr) {
+        if (arr == null || arr.length < 2) {
+            return;
         }
-        int l = 0, r = arr.length - 1, middle = 0;
-        while (l < r) {
-            middle = (l + r) / 2;
-            if(arr[middle] == num) {
-                return true;
-            } else if(arr[middle] > num) {
-                r = middle - 1;
-            } else {
-                l = middle + 1;
+        for (int i = 1; i < arr.length ; i++) {
+            for (int j = i; j > 0 && arr[j] < arr[j - 1]; j--) {
+                swap(arr, j, j - 1);
             }
         }
-        return arr[l] == num;
     }
 
-    public static boolean exist2(int[] sortedArr, int num) {
-        if (sortedArr == null || sortedArr.length == 0) {
-            return false;
-        }
-        int L = 0;
-        int R = sortedArr.length - 1;
-        int mid = 0;
-        while (L < R) {
-            mid = L + ((R - L) >> 1);
-            if (sortedArr[mid] == num) {
-                return true;
-            } else if (sortedArr[mid] > num) {
-                R = mid - 1;
-            } else {
-                L = mid + 1;
-            }
-        }
-        return sortedArr[L] == num;
+    public static void swap(int[] arr, int i, int j) {
+        arr[i] = arr[i] ^ arr[j];
+        arr[j] = arr[i] ^ arr[j];
+        arr[i] = arr[i] ^ arr[j];
     }
 
     // for test
@@ -68,6 +47,25 @@ public class Code04_BSExist {
     }
 
     // for test
+    public static boolean isEqual(int[] arr1, int[] arr2) {
+        if ((arr1 == null && arr2 != null) || (arr1 != null && arr2 == null)) {
+            return false;
+        }
+        if (arr1 == null && arr2 == null) {
+            return true;
+        }
+        if (arr1.length != arr2.length) {
+            return false;
+        }
+        for (int i = 0; i < arr1.length; i++) {
+            if (arr1[i] != arr2[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // for test
     public static void printArray(int[] arr) {
         if (arr == null) {
             return;
@@ -86,17 +84,22 @@ public class Code04_BSExist {
         boolean succeed = true;
         for (int i = 0; i < testTime; i++) {
             int[] arr1 = generateRandomArray(maxSize, maxValue);
-            Arrays.sort(arr1);
-            boolean exist1 = exist1(arr1, 50);
-            boolean exist2 = exist2(arr1, 50);
-            if (!exist1 == exist2) {
-                System.out.println(exist1);
-                System.out.println(exist2);
-                printArray(arr1);
+            int[] arr2 = copyArray(arr1);
+            insertionSort(arr1);
+            comparator(arr2);
+            if (!isEqual(arr1, arr2)) {
                 succeed = false;
+                printArray(arr1);
+                printArray(arr2);
                 break;
             }
         }
         System.out.println(succeed ? "Nice!" : "Fucking fucked!");
+
+        int[] arr = generateRandomArray(maxSize, maxValue);
+        printArray(arr);
+        insertionSort(arr);
+        printArray(arr);
     }
+
 }
