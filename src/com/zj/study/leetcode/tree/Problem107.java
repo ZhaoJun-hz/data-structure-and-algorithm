@@ -10,9 +10,9 @@ import java.util.Queue;
  * @desiription:
  * @date 2021/8/20 3:06 下午
  */
-public class Problem102 {
+public class Problem107 {
 
-    public List<List<Integer>> levelOrder(TreeNode root) {
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
         if(root == null) {
             return new ArrayList<>();
         }
@@ -33,7 +33,7 @@ public class Problem102 {
                 queue.offer(treeNode.right);
             }
             if (rowSize == 0) {
-                result.add(temp);
+                result.add(0, temp);
                 temp = new ArrayList<>();
                 rowSize  =  queue.size();
             }

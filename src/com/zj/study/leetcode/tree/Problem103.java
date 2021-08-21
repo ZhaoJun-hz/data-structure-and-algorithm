@@ -10,9 +10,9 @@ import java.util.Queue;
  * @desiription:
  * @date 2021/8/20 3:06 下午
  */
-public class Problem102 {
+public class Problem103 {
 
-    public List<List<Integer>> levelOrder(TreeNode root) {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         if(root == null) {
             return new ArrayList<>();
         }
@@ -22,9 +22,14 @@ public class Problem102 {
         queue.offer(root);
         List<Integer> temp = new ArrayList<>();
         int rowSize = 1;
+        int height = 0;
         while (!queue.isEmpty()) {
             TreeNode treeNode = queue.poll();
-            temp.add(treeNode.val);
+            if (height %  2  == 0) {
+                temp.add(treeNode.val);
+            }else {
+                temp.add(0, treeNode.val);
+            }
             rowSize --;
             if (treeNode.left != null) {
                 queue.offer(treeNode.left);
@@ -33,6 +38,7 @@ public class Problem102 {
                 queue.offer(treeNode.right);
             }
             if (rowSize == 0) {
+                height ++;
                 result.add(temp);
                 temp = new ArrayList<>();
                 rowSize  =  queue.size();

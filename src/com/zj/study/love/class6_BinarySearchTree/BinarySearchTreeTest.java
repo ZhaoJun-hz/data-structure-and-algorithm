@@ -1,10 +1,7 @@
 package com.zj.study.love.class6_BinarySearchTree;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 
 /**
  * @author zj
@@ -23,25 +20,27 @@ public class BinarySearchTreeTest {
         for (int i = 0; i < data.length; i++) {
             searchTree.add(data[i]);
         }
-        List<Integer> result = new ArrayList<>();
-        searchTree.preorderTraversal(integer -> result.add(integer));
-        System.out.println(result);
-        result.clear();
-        System.out.println("------------");
-        searchTree.inorderTraversal(integer -> result.add(integer));
-        System.out.println(result);
-        result.clear();
-        System.out.println("------------");
-        searchTree.postorderTraversal(integer -> result.add(integer));
-        System.out.println(result);
-        result.clear();
-        System.out.println("------------");
-        searchTree.levelOrderTraversal(element -> System.out.println(element * 3));
-        System.out.println("------------");
+        // List<Integer> result = new ArrayList<>();
+        // searchTree.preorderTraversal(integer -> result.add(integer));
+        // System.out.println(result);
+        // result.clear();
+        // System.out.println("------------");
+        // searchTree.inorderTraversal(integer -> result.add(integer));
+        // System.out.println(result);
+        // result.clear();
+        // System.out.println("------------");
+        // searchTree.postorderTraversal(integer -> result.add(integer));
+        // System.out.println(result);
+        // result.clear();
+        // System.out.println("------------");
+        // searchTree.levelOrderTraversal(element -> System.out.println(element * 3));
+        // System.out.println("-----println-------");
         System.out.println(searchTree);
-        System.out.println("------------");
-        System.out.println(searchTree.height());
-        System.out.println("------------");
-        System.out.println(searchTree.heightLevelOrderTraversal());
+        // System.out.println("------------");
+        // System.out.println(searchTree.height());
+        // System.out.println("------------");
+        // System.out.println(searchTree.heightLevelOrderTraversal());
+        searchTree.remove(7);
+        System.out.println(searchTree);
     }
 }

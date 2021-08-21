@@ -10,21 +10,21 @@ import java.util.Queue;
  * @desiription:
  * @date 2021/8/20 3:06 下午
  */
-public class Problem102 {
-
-    public List<List<Integer>> levelOrder(TreeNode root) {
+public class Problem637 {
+    public List<Double> averageOfLevels(TreeNode root) {
         if(root == null) {
             return new ArrayList<>();
         }
 
-        List<List<Integer>> result = new ArrayList<>();
+        List<Double> result = new ArrayList<>();
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
-        List<Integer> temp = new ArrayList<>();
         int rowSize = 1;
+        int tempRowSize = 1;
+        long sum = 0;
         while (!queue.isEmpty()) {
             TreeNode treeNode = queue.poll();
-            temp.add(treeNode.val);
+            sum += treeNode.val;
             rowSize --;
             if (treeNode.left != null) {
                 queue.offer(treeNode.left);
@@ -33,9 +33,10 @@ public class Problem102 {
                 queue.offer(treeNode.right);
             }
             if (rowSize == 0) {
-                result.add(temp);
-                temp = new ArrayList<>();
+                result.add(sum * 1.0 / tempRowSize);
                 rowSize  =  queue.size();
+                tempRowSize = rowSize;
+                sum = 0;
             }
         }
         return result;

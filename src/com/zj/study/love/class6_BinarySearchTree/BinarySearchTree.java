@@ -1,19 +1,13 @@
 package com.zj.study.love.class6_BinarySearchTree;
 
-import java.util.ArrayDeque;
 import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  * @author zj
  * @desiription:
  * @date 2021/8/16 4:53 下午
  */
-public class BinarySearchTree<E> {
-
-    private int size = 0;
-    private Node<E> root;
+public class BinarySearchTree<E> extends BinaryTree<E>{
 
     private Comparator<E> comparator;
 
@@ -25,17 +19,7 @@ public class BinarySearchTree<E> {
         this.comparator = comparator;
     }
 
-    public int size() {
-        return size;
-    }
 
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
-    public void clear() {
-
-    }
 
     /**
      * 二叉搜索树中添加元素
@@ -80,175 +64,73 @@ public class BinarySearchTree<E> {
     }
 
     public void remove(E element) {
+        remove(node(element));
+    }
 
+    private void remove(Node<E> node) {
+        if (node == null) {
+            return;
+        }
+        size--;
+        // 删除度为2的节点
+        if (node.hasTwoChild()) {
+            // 找到后继节点
+            Node<E> successor = successor(node);
+            // 用后继节点的值覆盖度为2的节点的值
+            node.element = successor.element;
+            // 删除后继节点
+            node = successor;
+        }
+        // 删除度为0或者1的节点
+        Node<E> replacement = node.left != null ? node.left : node.right;
+        // node 是度为1的节点
+        if (replacement != null) {
+            // 更改parent
+            replacement.parent = node.parent;
+            // 更改parent的left 或者 right的
+            if (node.parent == null) {
+                // node 是度为1的根节点
+                root = replacement;
+            } else if (node == node.parent.right) {
+                node.parent.right = replacement;
+            } else {
+                node.parent.left = replacement;
+            }
+        } else {
+            if (node.parent == null) {
+                // node 是根节点
+                root = null;
+            } else {
+                // node 是叶子节点
+                if (node == node.parent.right) {
+                    node.parent.right = null;
+                } else {
+                    node.parent.left = null;
+                }
+            }
+        }
+    }
+
+    private Node<E> node(E element) {
+        Node<E> node = root;
+        while (node != null) {
+            int cmp = compare(element, node.element);
+            if (cmp == 0) {
+                return node;
+            } else if (cmp > 0) {
+                node = node.right;
+            } else {
+                node = node.left;
+            }
+        }
+        return null;
     }
 
     public boolean contains(E element) {
-        return false;
+        Node<E> node = node(element);
+        return node != null;
     }
 
-
-    /**
-     * 前序遍历二叉树
-     *
-     * @param visitor
-     */
-    public void preorderTraversal(Visitor<E> visitor) {
-        preorderTraversal(root, visitor);
-    }
-
-    private void preorderTraversal(Node<E> node, Visitor<E> visitor) {
-        if (node == null || visitor == null) {
-            return;
-        }
-        visitor.visit(node.element);
-        preorderTraversal(node.left, visitor);
-        preorderTraversal(node.right, visitor);
-    }
-
-    /**
-     * 中序遍历二叉树
-     *
-     * @param visitor
-     */
-    public void inorderTraversal(Visitor<E> visitor) {
-        inorderTraversal(root, visitor);
-    }
-
-    private void inorderTraversal(Node<E> node, Visitor<E> visitor) {
-        if (node == null || visitor == null) {
-            return;
-        }
-        inorderTraversal(node.left, visitor);
-        visitor.visit(node.element);
-        inorderTraversal(node.right, visitor);
-    }
-
-    /**
-     * 后续遍历二叉树
-     *
-     * @param visitor
-     */
-    public void postorderTraversal(Visitor<E> visitor) {
-        postorderTraversal(root, visitor);
-    }
-
-    private void postorderTraversal(Node<E> node, Visitor<E> visitor) {
-        if (node == null || visitor == null) {
-            return;
-        }
-        postorderTraversal(node.left, visitor);
-        postorderTraversal(node.right, visitor);
-        visitor.visit(node.element);
-    }
-
-    /**
-     * 层次遍历树的高度
-     *
-     * @param visitor
-     */
-    public void levelOrderTraversal(Visitor<E> visitor) {
-        if (root == null || visitor == null) {
-            return;
-        }
-        Queue<Node<E>> queue = new LinkedList<>();
-        queue.offer(root);
-        while (!queue.isEmpty()) {
-            Node<E> node = queue.poll();
-            visitor.visit(node.element);
-            if (node.left != null) {
-                queue.offer(node.left);
-            }
-            if (node.right != null) {
-                queue.offer(node.right);
-            }
-        }
-    }
-
-    /**
-     * 递归获取树的高度
-     *
-     * @return
-     */
-    public int height() {
-        return height(root);
-    }
-
-    private int height(Node<E> node) {
-        if (node == null) {
-            return 0;
-        }
-        return 1 + Math.max(height(node.left), height(node.right));
-    }
-
-    /**
-     * 层次遍历获取树的高度
-     *
-     * @return
-     */
-    public int heightLevelOrderTraversal() {
-        if (root == null) {
-            return 0;
-        }
-
-        int height = 0;
-        // 存储着每一行的元素的数量
-        int rowSize = 1;
-
-        Queue<Node<E>> queue = new LinkedList<>();
-        queue.offer(root);
-        while (!queue.isEmpty()) {
-            Node<E> node = queue.poll();
-            rowSize --;
-            if (node.left != null) {
-                queue.offer(node.left);
-            }
-            if (node.right != null) {
-                queue.offer(node.right);
-            }
-            if (rowSize == 0) {
-                rowSize = queue.size();
-                height ++;
-            }
-        }
-        return height;
-    }
-
-    /**
-     * 判断一棵树是不是完全二叉树
-     *
-     * 如果树为空,返回false
-     *
-     * 如果树不为空,开始使用层次遍历二叉树,使用队列
-     * 如果node.left != null && node.right != null, 将node.left 和 node.right 按顺序入队
-     * 如果node.left == null && node.right != null, 返回false
-     * 如果node.left != null && node.right == null  或者 node.left == null && node.right == null, 那么后面遍历的节点应该都是叶子节点, 才是完全二叉树
-     *
-     * @return
-     */
-    public boolean isComplete() {
-        if (root == null) {
-            return false;
-        }
-
-        Queue<Node<E>> queue = new LinkedList<>();
-        queue.offer(root);
-
-        while (!queue.isEmpty()) {
-            Node<E> node = queue.poll();
-            if(node.left != null) {
-                queue.offer(node.left);
-            }
-
-            if(node.right != null) {
-                queue.offer(node.right);
-            }
-
-
-
-        }
-        return false;
-    }
 
     /**
      * @param e1
@@ -268,7 +150,6 @@ public class BinarySearchTree<E> {
         }
     }
 
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -284,21 +165,5 @@ public class BinarySearchTree<E> {
         sb.append(prefix).append(node.element).append("\n");
         toString(node.left, sb, prefix + "[L]");
         toString(node.right, sb, prefix + "[R]");
-    }
-
-    public static interface Visitor<E> {
-        void visit(E e);
-    }
-
-    private static class Node<E> {
-        E element;
-        Node<E> left;
-        Node<E> right;
-        Node<E> parent;
-
-        public Node(E element, Node<E> parent) {
-            this.element = element;
-            this.parent = parent;
-        }
     }
 }
