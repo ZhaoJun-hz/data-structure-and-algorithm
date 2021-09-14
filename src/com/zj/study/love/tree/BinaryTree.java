@@ -1,4 +1,6 @@
-package com.zj.study.love.class6_BinarySearchTree;
+package com.zj.study.love.tree;
+
+import com.zj.study.love.tree.printer.BinaryTreeInfo;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -8,7 +10,7 @@ import java.util.Queue;
  * @desiription:
  * @date 2021/8/21 8:33 下午
  */
-public class BinaryTree<E>{
+public class BinaryTree<E> implements BinaryTreeInfo {
     protected int size = 0;
     protected Node<E> root;
 
@@ -232,6 +234,10 @@ public class BinaryTree<E>{
         return true;
     }
 
+    protected Node<E> createNode(E element, Node<E> parent) {
+        return new Node<>(element, parent);
+    }
+
 
     public static interface Visitor<E> {
         void visit(E e);
@@ -255,5 +261,57 @@ public class BinaryTree<E>{
         public boolean hasTwoChild() {
             return left != null && right != null;
         }
+
+        public boolean isLeftChild() {
+            return parent != null && parent.left == this;
+        }
+
+        public boolean isRightChild() {
+            return parent != null && parent.right == this;
+        }
+
+        /**
+         * 返回兄弟节点
+         * @return
+         */
+        public Node<E> sibling() {
+            if (isLeftChild()) {
+                return parent.right;
+            }
+            if(isRightChild()) {
+                return parent.left;
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            String parentString = "null";
+            if (parent != null) {
+                parentString = parent.element.toString();
+            }
+            return element + "_p(" + parentString + ")";
+        }
+    }
+
+
+    @Override
+    public Object root() {
+        return root;
+    }
+
+    @Override
+    public Object left(Object node) {
+        return ((Node<E>) node).left;
+    }
+
+    @Override
+    public Object right(Object node) {
+        return ((Node<E>) node).right;
+    }
+
+    @Override
+    public Object string(Object node) {
+        return node;
     }
 }

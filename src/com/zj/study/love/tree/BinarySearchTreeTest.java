@@ -1,5 +1,8 @@
-package com.zj.study.love.class6_BinarySearchTree;
+package com.zj.study.love.tree;
 
+
+import com.zj.study.love.tree.BinarySearchTree;
+import com.zj.study.love.tree.printer.BinaryTrees;
 
 import java.util.Comparator;
 
@@ -35,12 +38,14 @@ public class BinarySearchTreeTest {
         // System.out.println("------------");
         // searchTree.levelOrderTraversal(element -> System.out.println(element * 3));
         // System.out.println("-----println-------");
-        System.out.println(searchTree);
+        BinaryTrees.println(searchTree);
         // System.out.println("------------");
         // System.out.println(searchTree.height());
         // System.out.println("------------");
         // System.out.println(searchTree.heightLevelOrderTraversal());
+        System.out.println("------------------------");
         searchTree.remove(7);
-        System.out.println(searchTree);
+
+        BinaryTrees.println(searchTree);
     }
 }

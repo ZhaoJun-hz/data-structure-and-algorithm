@@ -1,4 +1,4 @@
-package com.zj.study.love.class6_BinarySearchTree;
+package com.zj.study.love.tree;
 
 import java.util.Comparator;
 
@@ -19,8 +19,6 @@ public class BinarySearchTree<E> extends BinaryTree<E>{
         this.comparator = comparator;
     }
 
-
-
     /**
      * 二叉搜索树中添加元素
      *
@@ -31,8 +29,10 @@ public class BinarySearchTree<E> extends BinaryTree<E>{
 
         // 添加第一个节点
         if (root == null) {
-            root = new Node<>(element, null);
+            root = createNode(element, null);
             size++;
+            // 新添加之后的处理
+            afterAdd(root);
             return;
         }
 
@@ -54,13 +54,33 @@ public class BinarySearchTree<E> extends BinaryTree<E>{
             }
         }
         // 看看插入到父节点的哪个位置
-        Node<E> newNode = new Node<>(element, parent);
+        Node<E> newNode = createNode(element, parent);
         if (cmp > 0) {
             parent.right = newNode;
         } else {
             parent.left = newNode;
         }
         size++;
+        // 新添加之后的处理
+        afterAdd(newNode);
+    }
+
+
+
+    /**
+     * 添加node之后的调整
+     * @param node  新增加的节点
+     */
+    protected void afterAdd(Node<E> node) {
+
+    }
+
+    /**
+     * 删除node之后的调整
+     * @param node  被删除的节点
+     */
+    protected void afterRemove(Node<E> node) {
+
     }
 
     public void remove(E element) {
@@ -81,6 +101,7 @@ public class BinarySearchTree<E> extends BinaryTree<E>{
             // 删除后继节点
             node = successor;
         }
+
         // 删除度为0或者1的节点
         Node<E> replacement = node.left != null ? node.left : node.right;
         // node 是度为1的节点
@@ -96,10 +117,13 @@ public class BinarySearchTree<E> extends BinaryTree<E>{
             } else {
                 node.parent.left = replacement;
             }
+            // 删除节点之后的处理
+            afterRemove(replacement);
         } else {
             if (node.parent == null) {
                 // node 是根节点
                 root = null;
+                afterRemove(node);
             } else {
                 // node 是叶子节点
                 if (node == node.parent.right) {
@@ -107,8 +131,10 @@ public class BinarySearchTree<E> extends BinaryTree<E>{
                 } else {
                     node.parent.left = null;
                 }
+                afterRemove(node);
             }
         }
+
     }
 
     private Node<E> node(E element) {
@@ -148,22 +174,5 @@ public class BinarySearchTree<E> extends BinaryTree<E>{
         if (element == null) {
             throw new IllegalArgumentException("element must not be null");
         }
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-
-        toString(root, sb, "");
-        return sb.toString();
-    }
-
-    private void toString(Node<E> node, StringBuilder sb, String prefix) {
-        if (node == null) {
-            return;
-        }
-        sb.append(prefix).append(node.element).append("\n");
-        toString(node.left, sb, prefix + "[L]");
-        toString(node.right, sb, prefix + "[R]");
     }
 }
